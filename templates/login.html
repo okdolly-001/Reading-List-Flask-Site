@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html style="background-color:#eeeeee">
+
+  <head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static',
+      filename='css/login.css') }}">
+    <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+    </script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+    </script>
+    <script>
+      function start() {
+        gapi.load('auth2', function () {
+          auth2 = gapi.auth2.init({
+            client_id: "813625130102-hl3srump7dhtp1g8oubg5mak1ur6c1bu.apps.googleusercontent.com"
+          });
+        });
+      }
+    </script>
+    <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+  </head>
+
+  <body>
+    <div class="container is-fluid has-text-centered">
+      <div id="google_form">
+        <section>
+          <img id="google_img"
+            src="http://www.androidpolice.com/wp-content/themes/ap2/ap_resize/ap_resize.php?src=http%3A%2F%2Fwww.androidpolice.com%2Fwp-content%2Fuploads%2F2015%2F10%2Fnexus2cee_Search-Thumb-150x150.png&w=150&h=150&zc=3" />
+          <!-- GOOGLE SIGN IN BUTTON-->
+        </section>
+        <br />
+        <br />
+        <br />
+        <section>
+          <input type="image" src="../static/img/googleButton.png" id="signinButton" style="width:30%;height:30%;" />
+        </section>
+        <div id="result"></div>
+      </div>
+      <!--END GOOGLE PLUS SIGN IN BUTTON -->
+      <script>
+        $('#signinButton').click(function () {
+          function signInCallback(authResult) {
+            if (authResult['code']) {
+              $('#signinButton').attr('style', 'display: none');
+              $.ajax({
+                type: 'POST',
+                url: '/gconnect?state={{STATE}}',
+                contentType: 'application/octet-stream; charset=utf-8',
+                success: function (result) {
+                  $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
+                  setTimeout(function () {
+                    window.location.href = "/";
+                  }, 2000);
+                },
+                processData: false,
+                data: authResult['code']
+              });
+            } else {
+              // handle error
+              console.log('There was an error: ' + authResult['error']);
+              $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+            }
+          }
+          auth2.grantOfflineAccess().then(signInCallback);
+        });
+      </script>
+  </body>
+
+</html>

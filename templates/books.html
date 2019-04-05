@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<section class="section">
+	<div class="container is-fluid has-text-centered">
+		<h1 class="title is-1">{{ bookcategory.description }}</h1>
+		<div class="field is-grouped  is-pulled-right">
+			{% if 'user_id' in session %}
+			<p class="control">
+				<a href="{{url_for('readinglist.editBookCategory',book_category_id=
+				bookcategory.id )}}"> <span class="button is-link is-pulled-right">
+						Edit
+						Category</span></a>
+			</p>
+			<p class="control">
+				<a href="{{url_for('readinglist.newBook',book_category_id= bookcategory.id)}}"> <span
+						class="button is-info is-pulled-right">Add Book</span></a>
+			</p>
+			{%endif%}
+			<p class="control">
+				<a class="button is-primary" href="{{url_for('readinglist.showBookCategories')}}">main</a>
+			</p>
+		</div>
+	</div>
+</section>
+{%for book in books%}
+<section class="section">
+	<div class="container is-fluid is-centered">
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">
+					{{book.title}}
+				</p>
+				<a href="#" class="card-header-icon" aria-label="more options">
+					<span class="icon">
+						<i class="fas fa-angle-down" aria-hidden="true"></i>
+					</span>
+				</a>
+			</header>
+			<footer class="card-footer">
+				<a href="{{url_for('readinglist.showBook',book_category_id=bookcategory.id,book_id=book.id)}}"
+					class="card-footer-item">Detail</a>
+			</footer>
+		</div>
+	</div>
+</section>
+{%endfor%}
+{% endblock %}

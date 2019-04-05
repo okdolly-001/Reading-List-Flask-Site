@@ -1,0 +1,44 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<link rel=stylesheet type=text/css href="{{ url_for('static',
+	filename='css/edit.css') }}">
+<div class="container is-fluid has-text-centered">
+	<div class="section">
+		<h1 class="subtitle"> Edit &nbsp &nbsp
+			<a class="subtitle is-italic has-text-link">
+				{{book.title}}? </a>
+		</h1>
+	</div>
+	<form action="#" method="post">
+		<div class="form-group">
+			<div class="control">
+				<input type="text" class="form-control" maxlength="100" name="title" value="{{book.title }}" required>
+				<label class="label">Title</label>
+				<i class="bar"></i>
+			</div>
+			<p class="control">
+				<textarea name="description" required>{{book.description}}</textarea>
+				<label class="label">Description</label>
+				<i class="bar"></i>
+			</p>
+			<p class="control">
+				<select name="book_category_id">
+					{%for bookcategory in bookcategories%}
+					<option value={{bookcategory.id}} {% if book.book_category_id ==
+							bookcategory.id %}selected{%endif%}>{{bookcategory.description}}</option>
+					{%endfor%}
+				</select>
+				<label class="label">Genre</label>
+				<i class="bar"></i>
+			</p>
+			<p class="control">
+				<button class="button is-primary" type="submit"> Save </button>
+				<a class="button is-link" href="{{url_for('readinglist.showBooks',book_category_id=
+						book.book_category_id)}}">
+					Cancel
+				</a>
+			</p>
+	</form>
+</div>
+{% endblock %}

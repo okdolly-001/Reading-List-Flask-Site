@@ -1,0 +1,39 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+
+		<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+			data-target="navbarBasicExample">
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+		</a>
+	</div>
+
+	<div id="navbarBasicExample" class="navbar-menu">
+		<div class="navbar-start">
+
+			<a class="navbar-item" href="{{url_for('readinglist.showBookCategories')}}">
+				Book Genres
+			</a>
+
+			<a class="navbar-item" href="{{url_for('readinglist.showAboutPage')}}">
+				About
+			</a>
+		</div>
+
+		<div class="navbar-end">
+			<div class="navbar-item">
+				{% if 'user_id' in session %}
+				<a class="button is-primary" href="{{ url_for('auth.disconnect') }}">
+					<strong>Logout</strong>
+				</a>
+				{% else %}
+				<a class="button is-primary" href="{{ url_for('auth.show_login') }}">
+					<strong>Login</strong>
+				</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	</div>
+</nav>

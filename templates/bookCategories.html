@@ -1,0 +1,78 @@
+{% extends "main.html" %}
+
+{% block content %}
+{% include "header.html" %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+
+<div class="container is-fluid has-text-centered ">
+
+    <a class="is-primary is-outlined">
+        <span> {{messages[-1][1]}}</span>
+        <span class="icon is-small delete is-small">
+            <i class="fas fa-times"></i>
+        </span>
+    </a>
+
+</div>
+{% endif %} {% endwith %}
+
+<section class="section">
+    <div class="container is-fluid has-text-centered">
+        <h1 class="title">
+            Recommended Reading
+        </h1>
+        <br />
+    </div>
+    <div class="container is-fluid">
+        <blockquote class="is-italic"> " Cultivate as many theories as you
+            can—including
+            some that seem odd, counter-intuitive, or even mutually
+            contradictory—and hold onto them loosely. Don’t get too
+            attached to any one of them. "</blockquote>
+
+        <p class="is-pulled-right"> —— Dave Gray</p>
+    </div>
+</section>
+<section class="section">
+    <div class="container is-fluid">
+        <div class="box">
+            <div class="content">
+                <p>
+                    <strong>Section I: Books</strong>
+
+                    {% if 'user_id' in session %}
+                    <a href="{{url_for('readinglist.newBookCategory')}}"> <span class="button is-info is-pulled-right
+                                is-rounded">Add
+                            Category</span></a>
+                     <a href="{{url_for('readinglist.deleteBookCategories')}}"> <span class="button is-warning is-pulled-right
+                                is-rounded">Delete
+                            Category</span></a>
+            
+                    {%endif%}
+                </p>
+                <br />
+                {% for bookCategory in bookCategories %}
+                <a class="button is-light" href="{{url_for('readinglist.showBooks',
+                            book_category_id= bookCategory.id)}}">
+                    {{bookCategory.description}}
+                </a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.delete') || []).forEach(($delete) => {
+            $notification = $delete.parentNode;
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+    });
+</script>
+
+{% endblock %}

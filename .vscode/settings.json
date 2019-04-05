@@ -1,0 +1,8 @@
+{
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "autoDocstring.includeDescription": true,
+  "autoDocstring.includeName": true,
+  "editor.snippetSuggestions": "none",
+  "autoDocstring.docstringFormat": "google"
+}

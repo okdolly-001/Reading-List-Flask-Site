@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<div class="container is-fluid has-text-centered">
+  <div class="section">
+    <h1 class="subtitle">Do you want to delete &nbsp
+      <a class="subtitle is-italic has-text-link "> {{item.description}} </a> &nbsp ?
+    </h1>
+  </div>
+
+  <div class="section">
+    <form action="#" method='post'>
+      <button class="button is-danger" type="submit"> Delete </button>
+
+      <a class="button is-info" href="{{url_for('readinglist.showBookCategories'	)}}">
+        Cancel
+      </a>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

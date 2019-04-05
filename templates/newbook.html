@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<link rel=stylesheet type=text/css href="{{ url_for('static',
+	filename='css/edit.css') }}">
+<div class="container">
+	<div class="section">
+		<h1 class="title is-3"> {{book_category.description }} </h1>
+		<hr />
+		<form action="#" method="post">
+			<div class="control">
+				<input type="text" class="form-control" maxlength="100" name="title" required>
+				<label class="label">Title</label>
+				<i class="bar"></i>
+			</div>
+			<p class="control">
+				<textarea name="description" required></textarea>
+				<label class="label">Description</label>
+				<i class="bar"></i>
+			</p>
+			<p class="control">
+				<button class="button is-primary" type="submit"> Save </button>
+				<a class="button is-link" href="{{url_for('readinglist.showBooks',book_category_id=
+						book_category.id)}}">
+					Cancel
+				</a>
+			</p>
+		</form>
+	</div>
+</div>
+{% endblock %}

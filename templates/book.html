@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<section class="section">
+  <div class="container is-fluid has-text-centered">
+    <h1 class="title is-1">{{ book.title}}</h1>
+    <div class="field is-grouped  is-pulled-right">
+      <p class="control">
+        <a href="{{url_for('readinglist.showBooks',book_category_id= book.book_category_id)}}"> <span
+            class="button is-info is-pulled-right">Back</span></a>
+      </p>
+      <p class="control">
+        <a class="button is-primary" href="{{url_for('readinglist.showBookCategories')}}">Main</a>
+      </p>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-fluid is-centered">
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          {{book.description}}
+          <br>
+        </div>
+      </div>
+      <footer class="card-footer">
+        {% if 'user_id' in session %}
+        <a href="{{url_for('readinglist.editBook',book_category_id=book.book_category_id, book_id=book.id)}}"
+          class="card-footer-item">Edit</a>
+        <a href="{{url_for('readinglist.deleteBook',book_category_id=
+					book.book_category_id, book_id=book.id)}}" class="card-footer-item">Delete</a>
+        {%endif%}
+      </footer>
+    </div>
+  </div>
+</section>
+{% endblock %}
