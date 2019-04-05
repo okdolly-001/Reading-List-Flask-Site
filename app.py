@@ -14,7 +14,7 @@ login_manager.login_view = 'auth.show_login'
 login_manager.login_message_category = "warning"
 
 # A blueprint defines a collection of views, templates and static assets.
-#See: https://danidee10.github.io/2016/11/20/flask-by-example-8.html
+# See: https://danidee10.github.io/2016/11/20/flask-by-example-8.html
 app.register_blueprint(readinglist)
 app.register_blueprint(auth)
 app.register_blueprint(api)

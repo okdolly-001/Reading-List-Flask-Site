@@ -113,7 +113,6 @@ def gconnect():
     user_id = get_user_id(data["email"])
     if not user_id:
         user_id = create_user(login_session)
-    print("checkpoint")
 
     login_session['user_id'] = user_id
     print(login_session['user_id'])

@@ -26,7 +26,7 @@ def showAboutPage():
 @readinglist.route('/')
 @readinglist.route('/bookcategory/')
 def showBookCategories():
-    """Show all book categories created by current user. If not logged in, 
+    """Show all book categories created by current user. If not logged in,
     show book categories from pre-populated database.
     """
     if 'user_id' not in login_session:
@@ -49,8 +49,7 @@ def showBooks(book_category_id):
 
     Fetch the books created by current user with book_category_id.
     If user is not logged in, show the books in default database with
-    book_category_id. 
-    If book_category is not found, display message.
+    book_category_id. If book_category is not found, display message.
 
     Args:
         book_category_id ([int])
@@ -77,9 +76,8 @@ def showBooks(book_category_id):
 @readinglist.route('/bookcategory/<int:book_category_id>/book/<int:book_id>')
 def showBook(book_category_id, book_id):
     """Show book detail
-
     Fetch the book created by current user with book_id.
-    If user is not logged in, show a book in default database with book_id. 
+    If user is not logged in, show a book in default database with book_id.
     Otherwise, display message.
 
     Args:
@@ -101,7 +99,7 @@ def showBook(book_category_id, book_id):
 @readinglist.route('/bookcategory/new/', methods=['GET', 'POST'])
 @login_required
 def newBookCategory():
-    """Create new book when user is logged in, 
+    """Create new book when user is logged in,
     otherwise, redirect to login page (@login_required).
     """
     if request.method == 'POST':
@@ -119,8 +117,7 @@ def newBookCategory():
 @login_required
 def newBook(book_category_id):
     """Create a new book with book_category_id
-
-    Can only be done if user is logged in and has created 
+    Can only be done if user is logged in and has created
     book_category_id
 
     Args:
@@ -151,9 +148,8 @@ def newBook(book_category_id):
     methods=['GET', 'POST'])
 @login_required
 def editBookCategory(book_category_id):
-    """Edit a book category created by the current user with 
-    book_category_id
-    """
+    """Edit a book category created by the current user with
+    book_category_id"""
     edited_bookcategory = session.query(BookCategory).filter_by(
         id=book_category_id, user_id=current_user.id).first()
 
@@ -176,8 +172,7 @@ def editBookCategory(book_category_id):
     methods=['GET', 'POST'])
 @login_required
 def editBook(book_category_id, book_id):
-    """Edit a book created by the current user    
-
+    """Edit a book created by the current user
     User is logged in because @login_required will redirect to login
     page if not logged in.
 
@@ -228,7 +223,7 @@ def deleteBookCategories():
     methods=['GET', 'POST'])
 @login_required
 def deleteBookCategory(book_category_id):
-    """Delete a book category created by the current user with 
+    """Delete a book category created by the current user with
     book_category_id.
     User is logged in because @login_required will redirect to login
     page if not logged in.
@@ -260,9 +255,8 @@ def deleteBook(book_category_id, book_id):
     page if not logged in.
 
     Returns:
-        Redirect to books page with book_category_id 
+        Redirect to books page with book_category_id
     """
-
     itemToDelete = session.query(Book).filter_by(
         id=book_id, user_id=current_user.id).first()
     if not itemToDelete:
